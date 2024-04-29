@@ -44,7 +44,7 @@ CLICK_AFTER_DOWNSCROLL = (1550, 808)
 tickets = [A23, A24, A25, A26, A27]
 
 def readVariables():
-    with open('/settings.json') as f:
+    with open('settings.json') as f:
         data = json.load(f)
         NEULADEN = data['NEULADEN']
         JETZT_PLAETZE_AUSWAEHLEN = data['JETZT_PLAETZE_AUSWAEHLEN']
@@ -62,7 +62,6 @@ def readVariables():
         CONNECTION_GONE = data['CONNECTION_GONE']
         downscroll = data['downscroll']
         CLICK_AFTER_DOWNSCROLL = data['CLICK_AFTER_DOWNSCROLL']
-        tickets = data['tickets']
 
 def readText():
     imageToRead = pyautogui.screenshot()
@@ -93,7 +92,7 @@ def testForColor(color2, position):
     return abs(color1[0] - color2[0]) < 8 and abs(color1[1] - color2[1]) < 8 and abs(color1[2] < color2[2]) < 8
 
 def handleNoTicket():
-    while not testForColor(WHITE, NO_TICKET_FOUND_LOADING) and not cancel:
+    while not testForColor(WHITE, NO_TICKET_FOUND_LOADING):
         if (testForColor(HSV_DARK_BLUE, JETZT_PLAETZE_AUSWAEHLEN)):
             return
         time.sleep(0.01)
