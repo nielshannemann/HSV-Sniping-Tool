@@ -44,7 +44,7 @@ CLICK_AFTER_DOWNSCROLL = (1550, 808)
 tickets = [A23, A24, A25, A26, A27]
 
 def readVariables():
-    with open('resources/settings.json') as f:
+    with open('/settings.json') as f:
         data = json.load(f)
         NEULADEN = data['NEULADEN']
         JETZT_PLAETZE_AUSWAEHLEN = data['JETZT_PLAETZE_AUSWAEHLEN']
