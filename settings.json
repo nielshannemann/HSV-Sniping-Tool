@@ -1,1 +1,18 @@
-{"position_neuladen": [107, 70], "position_ticketansicht": [278, 972], "position_regler_r": [929, 280], "position_regler_l": [509, 277], "position_platzvorschlag": [1231, 856], "position_warenkorb": [1840, 946], "position_keinTicket": [922, 546], "serverError": [1080, 633]}
+{
+    "NEULADEN": [116, 81],
+    "JETZT_PLAETZE_AUSWAEHLEN": [600, 1000],
+    "PLATZVORSCHLAG_ERHALTEN": [1300, 900],
+    "NO_TICKET_FOUND": [1430, 340],
+    "NO_TICKET_FOUND_LOADING": [1887, 401],
+    "WARENKORB": [1750, 950],
+    "A23": [555, 554],
+    "A24": [579, 552],
+    "A25": [603, 551],
+    "A26": [628, 552],
+    "A27": [648, 553],
+    "PRICE_SLIDER": [[920, 293], [470, 293]],
+    "NO_TICKET_IN_WINDOW": [995, 472],
+    "CONNECTION_GONE": [995, 455],
+    "downscroll": [[1908, 190], [1908, 426]],
+    "CLICK_AFTER_DOWNSCROLL": [1550, 808]
+}

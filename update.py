@@ -41,7 +41,28 @@ downscroll = [(1908, 190), (1908, 426)]
 CLICK_AFTER_DOWNSCROLL = (1550, 808)
 
 # Ticketauswahl!
-tickets = [A24, A25, A26]
+tickets = [A23, A24, A25, A26, A27]
+
+def readVariables():
+    with open('resources/settings.json') as f:
+        data = json.load(f)
+        NEULADEN = data['NEULADEN']
+        JETZT_PLAETZE_AUSWAEHLEN = data['JETZT_PLAETZE_AUSWAEHLEN']
+        PLATZVORSCHLAG_ERHALTEN = data['PLATZVORSCHLAG_ERHALTEN']
+        NO_TICKET_FOUND = data['NO_TICKET_FOUND']
+        NO_TICKET_FOUND_LOADING = data['NO_TICKET_FOUND_LOADING']
+        WARENKORB = data['WARENKORB']
+        A23 = data['A23']
+        A24 = data['A24']
+        A25 = data['A25']
+        A26 = data['A26']
+        A27 = data['A27']
+        PRICE_SLIDER = data['PRICE_SLIDER']
+        NO_TICKET_IN_WINDOW = data['NO_TICKET_IN_WINDOW']
+        CONNECTION_GONE = data['CONNECTION_GONE']
+        downscroll = data['downscroll']
+        CLICK_AFTER_DOWNSCROLL = data['CLICK_AFTER_DOWNSCROLL']
+        tickets = data['tickets']
 
 def readText():
     imageToRead = pyautogui.screenshot()
@@ -72,7 +93,7 @@ def testForColor(color2, position):
     return abs(color1[0] - color2[0]) < 8 and abs(color1[1] - color2[1]) < 8 and abs(color1[2] < color2[2]) < 8
 
 def handleNoTicket():
-    while not testForColor(WHITE, NO_TICKET_FOUND_LOADING):
+    while not testForColor(WHITE, NO_TICKET_FOUND_LOADING) and not cancel:
         if (testForColor(HSV_DARK_BLUE, JETZT_PLAETZE_AUSWAEHLEN)):
             return
         time.sleep(0.01)
@@ -89,7 +110,13 @@ def reload():
     pyautogui.click(NEULADEN)
     time.sleep(0.01)
 
+    cancel = False
     while not testForColor(HSV_DARK_BLUE, JETZT_PLAETZE_AUSWAEHLEN):
+        if (keyboard.is_pressed('esc')):
+            mainWindow.wm_state('normal')
+            mainWindow.attributes('-topmost', 1)
+            cancel = True
+            return
         handleNoTicket()
         time.sleep(1)
 
@@ -111,7 +138,7 @@ def snipeFor(tickets):
     count = 0
     while not cancel:
         count += 1
-        if count % 50 == 0:
+        if count % 500 == 0:
             inactivityCheck()
         for ticket in tickets:
             pyautogui.moveTo(ticket)
@@ -138,6 +165,8 @@ def setup():
     mainWindow.attributes('-topmost', 1)
     mainWindow.iconbitmap("./resources/img/icon.ico")
     mainWindow.resizable(False, False)
+    readVariables()
+    pyautogui.PAUSE = 0.001
 
     # Einrichten der Bilder
     backgroundImg = ImageTk.PhotoImage(Image.open("./resources/img/hsv.jpg"))
